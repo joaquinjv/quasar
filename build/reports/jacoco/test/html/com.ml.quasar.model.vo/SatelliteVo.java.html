@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SatelliteVo.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">quasar</a> &gt; <a href="index.source.html" class="el_package">com.ml.quasar.model.vo</a> &gt; <span class="el_source">SatelliteVo.java</span></div><h1>SatelliteVo.java</h1><pre class="source lang-java linenums">package com.ml.quasar.model.vo;
+
+import java.io.Serializable;
+import java.util.List;
+
+public class SatelliteVo implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8784356098434167493L;
+	
+	private String name;
+	private double distance;
+	private List&lt;String&gt; message;
+	
+	public SatelliteVo() {
+<span class="fc" id="L18">		super();</span>
+<span class="fc" id="L19">	}</span>
+
+	public SatelliteVo(String name, double distance) {
+<span class="fc" id="L22">		super();</span>
+<span class="fc" id="L23">		this.name = name;</span>
+<span class="fc" id="L24">		this.distance = distance;</span>
+<span class="fc" id="L25">	}</span>
+
+	public double getDistance() {
+<span class="fc" id="L28">		return distance;</span>
+	}
+
+	public void setDistance(double distance) {
+<span class="fc" id="L32">		this.distance = distance;</span>
+<span class="fc" id="L33">	}</span>
+
+	public String getName() {
+<span class="nc" id="L36">		return name;</span>
+	}
+
+	public void setName(String name) {
+<span class="fc" id="L40">		this.name = name;</span>
+<span class="fc" id="L41">	}</span>
+
+	public List&lt;String&gt; getMessage() {
+<span class="fc" id="L44">		return message;</span>
+	}
+
+	public void setMessage(List&lt;String&gt; message) {
+<span class="fc" id="L48">		this.message = message;</span>
+<span class="fc" id="L49">	}</span>
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

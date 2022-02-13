@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BroadcastService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">quasar</a> &gt; <a href="index.source.html" class="el_package">com.ml.quasar.service.broadcast</a> &gt; <span class="el_source">BroadcastService.java</span></div><h1>BroadcastService.java</h1><pre class="source lang-java linenums">package com.ml.quasar.service.broadcast;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.ml.quasar.exception.AppException;
+import com.ml.quasar.message.I_MessageSolver;
+import com.ml.quasar.model.vo.SatelliteVo;
+
+@Service
+<span class="fc" id="L14">public class BroadcastService implements I_BroadcastService {</span>
+
+	@Autowired
+	private I_MessageSolver messageSolver;
+	
+	@Override
+	public String getMessageFromSatellites(List&lt;SatelliteVo&gt; satellites) throws AppException {
+		
+<span class="fc" id="L22">		List&lt;List&lt;String&gt;&gt; messages = new ArrayList&lt;List&lt;String&gt;&gt;();</span>
+<span class="fc bfc" id="L23" title="All 2 branches covered.">		for (SatelliteVo satelliteVo : satellites) {</span>
+<span class="fc" id="L24">			messages.add(satelliteVo.getMessage());</span>
+<span class="fc" id="L25">		}</span>
+<span class="pc bpc" id="L26" title="1 of 2 branches missed.">		if (messages.size() == 0) return &quot;&quot;;</span>
+		// Get the length of the message
+<span class="fc" id="L28">		int size = messages.get(0).size();</span>
+<span class="fc" id="L29">		String result = &quot;&quot;;</span>
+<span class="fc bfc" id="L30" title="All 2 branches covered.">		for (int i = 0; i &lt; size; i++) {</span>
+<span class="fc" id="L31">			String resultTemp = searchWord(messages, i);</span>
+			// There was some error collected the message
+<span class="fc bfc" id="L33" title="All 2 branches covered.">			if (resultTemp == &quot;&quot;) throw new AppException(this.getMessageSolver().getMessage(&quot;broadcast.message.cannot.read&quot;));</span>
+<span class="fc" id="L34">			result += resultTemp + &quot; &quot;;</span>
+		}
+<span class="fc" id="L36">		return result.trim();</span>
+	}
+
+	private String searchWord(List&lt;List&lt;String&gt;&gt; messages, int index) {
+<span class="fc bfc" id="L40" title="All 2 branches covered.">		for (List&lt;String&gt; list : messages) {</span>
+<span class="fc bfc" id="L41" title="All 2 branches covered.">			if (list.get(index) != &quot;&quot;) return list.get(index);</span>
+<span class="fc" id="L42">		}</span>
+<span class="fc" id="L43">		return &quot;&quot;;</span>
+	}
+
+	public I_MessageSolver getMessageSolver() {
+<span class="fc" id="L47">		return messageSolver;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>
