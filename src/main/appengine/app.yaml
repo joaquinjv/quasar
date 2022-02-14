@@ -2,7 +2,7 @@ runtime: java
 env: flex
 
 handlers:
-- url: .*
+- url: /.*
   secure: always
   script: auto
 
