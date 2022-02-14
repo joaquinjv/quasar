@@ -24,7 +24,7 @@ import com.ml.quasar.service.broadcast.I_BroadcastService;
 import com.ml.quasar.service.location.I_LocationService;
 
 @RestController
-@RequestMapping(path = "/")
+@RequestMapping(path = "/core")
 @Scope("request")
 public class TopSecretController {
 	
