@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -111,6 +112,17 @@ public class TopSecretController {
 			logger.debug("unexpected exception", e);
 			e.printStackTrace();
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+		}
+	}
+	
+	@GetMapping(value = "/gettest", produces = "application/json")
+	public void gettest() {
+		try {
+			this.getLogger().info("get test ok!");
+			
+		} catch (Exception e) {
+			logger.debug("unexpected exception", e);
+			e.printStackTrace();
 		}
 	}
 
