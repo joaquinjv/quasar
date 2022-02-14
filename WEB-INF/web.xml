@@ -4,8 +4,11 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
          http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
-    <servlet-mapping>
-        <servlet-name>quasar</servlet-name>
-        <url-pattern>/*</url-pattern>
-    </servlet-mapping>
+	<welcome-file-list>
+		<welcome-file></welcome-file>
+	</welcome-file-list>
+	<servlet-mapping>
+		<servlet-name>quasar</servlet-name>
+		<url-pattern>/*</url-pattern>
+	</servlet-mapping>
 </web-app>
