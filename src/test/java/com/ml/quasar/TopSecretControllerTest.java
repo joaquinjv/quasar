@@ -45,7 +45,7 @@ class TopSecretControllerTest {
 
 	private MockMvc mockMvc;
 	
-	private final String baseurl = "/";
+	private final String baseurl = "/core/";
 	
 	protected Gson gson = new Gson();
 	
