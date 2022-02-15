@@ -32,6 +32,7 @@ configurations {
 
 dependencies {
 	implementation 'com.google.appengine:appengine-api-1.0-sdk:+'
+	implementation 'com.google.appengine:appengine-endpoints:1.9.53'
 	implementation 'org.apache.logging.log4j:log4j-api:2.15.0'
 	implementation 'org.apache.logging.log4j:log4j-core:2.15.0'
 	implementation 'org.apache.logging.log4j:log4j-slf4j-impl:2.15.0'
