@@ -48,7 +48,6 @@ dependencies {
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 	providedCompile 'com.google.appengine:appengine:+'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	compile 'org.springframework.security.experimental:spring-security-oauth2-authorization-server:0.1.0-SNAPSHOT'
 	
 }
 
