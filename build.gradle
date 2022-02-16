@@ -14,17 +14,17 @@ plugins {
 	id 'java'
 	id 'war'
 	id 'jacoco'
-	id 'com.google.cloud.tools.appengine' version '2.4.2'
+	id 'com.google.cloud.tools.appengine'
 }
 
-group = 'com.ml'
-version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
 repositories {
-	mavenCentral()
-	jcenter()
-	maven { url 'https://repo.spring.io/snapshot' }
+	maven {
+    	url 'https://oss.sonatype.org/content/repositories/snapshots' // SNAPSHOT repository (if needed)
+	}
+  	mavenCentral()
+  	jcenter()
 }
 
 configurations {
@@ -58,6 +58,9 @@ appengine {
 		version = '1'
 	}
 }
+
+group   = "com.ml.quasar"        // Generated output GroupId
+version = "1.0-SNAPSHOT"       // Version in generated output
 
 /*
 tasks.named('test') {
