@@ -1,6 +1,6 @@
 package com.ml.quasar;
 
-import java.io.FileInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -49,8 +49,10 @@ public class QuasarConfig implements WebMvcConfigurer {
 	@Bean
 	public Map<String, String> dataProperties() {
 		Map<String, String> hashMap = new HashMap<String, String>();
-		try (InputStream input = new FileInputStream("src/main/resources/data.properties")) {
-            Properties properties = new Properties();
+		System.out.println(new File("data.properties").getAbsolutePath());
+//		try (InputStream input = new FileInputStream("src/main/resources/data.properties")) {
+		try (InputStream input = getClass().getResourceAsStream("/data.properties")) {
+			Properties properties = new Properties();
             properties.load(input);
             
             hashMap.put("kenobi", properties.get("kenobi").toString());

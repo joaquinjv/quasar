@@ -1,9 +1,15 @@
 runtime: java11
+<<<<<<< HEAD
 instance_class: F4
 entrypoint: java -noverify -jar quasar-3.0-SNAPSHOT.jar
 
 env_variables:
  spring_profiles_active: "dev"
+=======
+#entrypoint: java -Xmx64m -jar com.ml.quasar-1.0-SNAPSHOT.war
+entrypoint: 'java -cp "*" com.ml.quasar.QuasarApplication quasar-3.0-SNAPSHOT.war'
+
+>>>>>>> 13a2b54 (Update build.gradle)
 
 handlers:
 - url: /.*
