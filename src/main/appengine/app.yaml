@@ -1,6 +1,9 @@
 runtime: java11
-env: flex
-entrypoint: java -Xmx64m -jar com.ml.quasar-1.0-SNAPSHOT.war
+instance_class: F4
+entrypoint: java -noverify -jar quasar-3.0-SNAPSHOT.jar
+
+env_variables:
+ spring_profiles_active: "dev"
 
 handlers:
 - url: /.*
