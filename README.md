@@ -42,7 +42,7 @@ Una vez que tenemos la información que necesitamos de la base de datos devolvem
 
 Utilizamos JUnit para tener test del proecto y utilizamos JaCoCo como herramienta para tener reportes de los test del mismo, con esta herramienta podemos revisar el barrido de código que tenemos cubierto en el proyecto. Acceso a los resultados. Creemos que es de gran importancia contar con estos test.
 
-### link a jacoco reporte
+### [Link al reporte de JaCoCo](https://github.com/joaquinjv/quasar/blob/main/coverageJaCoCo.html)
 
 ## Como ejecutar
 
