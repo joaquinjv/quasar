@@ -51,7 +51,7 @@ Se debe clonar el proyecto del siguiente link. Una vez levantado en nuestro ambi
 * http://localhost:8080/core/topsecret
 
 La información a enviar debe ser un JSON, como por ejemplo:
-
+```
 {
     "satellites": [{
         "name": "kenobi",
@@ -67,9 +67,9 @@ La información a enviar debe ser un JSON, como por ejemplo:
         "message": ["este","","un","",""]
     }]
 }
-
+```
 La respuesta devuelta será del siguiente formato.
-
+```
 {
     "position": {
         "x": 21.0,
@@ -77,7 +77,7 @@ La respuesta devuelta será del siguiente formato.
     },
     "message": "este es un mensaje secreto"
 }
-
+```
 con Status 200 OK.
 
 En caso de no poder por ejemplo codificar el mensaje u obtener las coordenadas la respuesta será Status 404 NOT FOUND.
