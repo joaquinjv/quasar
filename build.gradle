@@ -5,7 +5,6 @@ buildscript {
 
 	dependencies {
 		classpath 'com.google.cloud.tools:appengine-gradle-plugin:2.4.2'
-		classpath 'org.akhikhl.gretty:gretty:+'
 	}
 }
 
@@ -13,8 +12,8 @@ plugins {
 	id 'org.springframework.boot' version '2.6.3'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
+	id 'jacoco'
 	id 'war'
-	id 'org.gretty' version '3.0.3'
 	id 'com.google.cloud.tools.appengine' version '2.4.2'
 }
 
@@ -53,23 +52,7 @@ dependencies {
 	
     implementation 'org.springframework.boot:spring-boot-dependencies:2.0.5.RELEASE'
 	
-    components {
-        withModule('org.springframework:spring-beans') {
-            allVariants {
-                withDependencyConstraints {
-                    // Need to patch constraints because snakeyaml is an optional dependency
-                    it.findAll { it.name == 'snakeyaml' }.each { it.version { strictly '1.19' } }
-                }
-            }
-        }
-    }
 }
-
-gretty {
-    servletContainer = 'jetty9'  // What App Engine Flexible uses
-}
-
-import org.akhikhl.gretty.AppStartTask
 
 appengine {
 	deploy {
@@ -87,11 +70,11 @@ bootJar {
 }
 version = "3.0-SNAPSHOT"       // Version in generated output
 
-/*
+
 tasks.named('test') {
 	useJUnitPlatform()
 }
 
 jacocoTestReport {
     dependsOn test // tests are required to run before generating the report
-}*/
+}
