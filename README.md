@@ -11,6 +11,9 @@ Objectives:
 solution:
 * The assembly of the message is simply to verify the messages little by little and when it is complete, respond. If we went through all the messages and could not reassemble the message, it is already an unfinished response.
 * Obtaining the coordinate of the satellite that sends the information is not something trivial. Doing some research is done through trilateration. Mathematically we find information and we must transcribe the same in the form of code to obtain an answer. At the same time there was a Java library that I used to check the results and also advanced websites to do the calculation. 
+   * Sources: https://en.wikipedia.org/wiki/True-range_multilateration
+   * https://www.edb.gov.hk/attachment/en/curriculum-development/kla/ma/res/STEM%20example_sec_trilateration%20GPS_eng.pdf
+   * Nota: Note: In fact, the coordinate test was made from an example of the pdf.
 
 ## Technologies
 
@@ -123,6 +126,9 @@ Objetivos:
 Solución:
 * El armado del mensaje es simplemente verificar de a poco los mensajes y cuando esté completo responder. Si pasamos por todos los mensajes y no pudimos rearmar el mensaje ya es una respuesta inconclusa.
 * La obtención de la coordenada del satélite que envía la información, no es algo trivial. Investigando un poco se hace mediante trilateración. Matemáticamente encontramos información y eso mismo debemos transcribir en forma de código para obtener una respuesta. Al mismo tiempo había una librería en Java que usé para comprobar los resultados y también sitios web de matemática avanzada para hacer el cálculo.
+   * Fuentes: https://en.wikipedia.org/wiki/True-range_multilateration
+   * https://www.edb.gov.hk/attachment/en/curriculum-development/kla/ma/res/STEM%20example_sec_trilateration%20GPS_eng.pdf
+   * Nota: De hecho el test de coordenadas se hizo a partir de un ejemplo del pdf.
 
 ## Tecnología
 
