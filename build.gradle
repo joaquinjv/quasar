@@ -70,8 +70,7 @@ bootJar {
 }
 version = "3.0-SNAPSHOT"       // Version in generated output
 
-
-tasks.named('test') {
+test {
 	useJUnitPlatform()
 }
 
