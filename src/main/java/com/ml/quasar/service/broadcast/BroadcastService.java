@@ -23,7 +23,9 @@ public class BroadcastService implements I_BroadcastService {
 		for (SatelliteVo satelliteVo : satellites) {
 			messages.add(satelliteVo.getMessage());
 		}
-		if (messages.size() == 0) return "";
+		if (messages.size() == 0 || messages.get(0).size() == 0) {
+			throw new AppException(this.getMessageSolver().getMessage("broadcast.message.cannot.read"));
+		}
 		// Get the length of the message
 		int size = messages.get(0).size();
 		String result = "";

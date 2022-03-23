@@ -21,6 +21,7 @@ import com.ml.quasar.exception.AppException;
 import com.ml.quasar.model.vo.PositionVo;
 import com.ml.quasar.model.vo.SatelliteConstellationVo;
 import com.ml.quasar.model.vo.SatelliteResponseVo;
+import com.ml.quasar.model.vo.SatelliteVo;
 import com.ml.quasar.service.broadcast.I_BroadcastService;
 import com.ml.quasar.service.location.I_LocationService;
 
@@ -42,6 +43,8 @@ public class TopSecretController {
 	
 	@Autowired
 	private Map<String, String> dataProperties;
+	
+	private static SatelliteConstellationVo constellationInSplit = new SatelliteConstellationVo();
 	
 	@PostMapping(value = "/top_secret", consumes = "application/json", produces = "application/json")
 	public ResponseEntity<?> topSecret(@RequestBody SatelliteConstellationVo satelliteConstellationVo) {
@@ -83,31 +86,15 @@ public class TopSecretController {
 		return locations;
 	}
 	
-	@RequestMapping(value = "/topsecret_split", consumes = "application/json", produces = "application/json", method = {RequestMethod.POST, RequestMethod.GET})
-	public ResponseEntity<?> topsecret_split(@RequestBody SatelliteConstellationVo satelliteConstellationVo) {
+	@RequestMapping(value = "/topsecret_split", consumes = "application/json", produces = "application/json", method = RequestMethod.POST)
+	public ResponseEntity<?> topsecretSplitPost(@RequestBody SatelliteVo satelliteVo) {
 		try {
-			this.getLogger().info("about to persist top secret {}", satelliteConstellationVo);
+			this.getLogger().info("about to persist top secret {}", satelliteVo);
 			
-			// This example I get from a math paper with this values and this result (expectedPosition)
-	        List<PositionVo> positions = setPositionFromProperties();
+			// Add a satellite
+			constellationInSplit.getSatellites().add(satelliteVo);
 	        
-	        double[] expectedPosition = new double[]{21.0, 20.0};
-
-	        double[] libCalculatedPosition1 = locationService.getLocation(positions, satelliteConstellationVo.getSatellites());
-	        
-	        double[] handCalculatedPosition = locationService.getHandLocation(positions, satelliteConstellationVo.getSatellites());
-	        
-	        System.out.println("With lib: " + libCalculatedPosition1[0] + "," + libCalculatedPosition1[1] 
-	        		+ " - to hand: " + handCalculatedPosition[0] + "," + handCalculatedPosition[1]);
-	        
-	        logger.debug("result {}, and expected {}", handCalculatedPosition, expectedPosition);
-
-	        String message = broadcastService.getMessageFromSatellites(satelliteConstellationVo.getSatellites());
-			SatelliteResponseVo satelliteResponseVo = new SatelliteResponseVo(handCalculatedPosition, message);
-			return ResponseEntity.status(HttpStatus.OK).body(satelliteResponseVo);
-		} catch (AppException ex) {
-			logger.debug("App exception", ex);
-			return ex.getRespose();
+			return ResponseEntity.status(HttpStatus.OK).body(null);
 		} catch (Exception e) {
 			logger.debug("unexpected exception", e);
 			e.printStackTrace();
@@ -115,6 +102,53 @@ public class TopSecretController {
 		}
 	}
 	
+	@RequestMapping(value = "/topsecret_split", produces = "application/json", method = RequestMethod.GET)
+	public ResponseEntity<?> topsecretSplitGet() {
+		try {
+			this.getLogger().info("about to check top secret split");
+			
+			// Check if we have the enough of satellite's message to try to decode the message (three), if not, fill in with generic data
+			this.fillInData();
+			
+			// check if we are able to decode the message
+			List<PositionVo> positions = setPositionFromProperties();
+	        double[] handCalculatedPosition = locationService.getHandLocation(positions, constellationInSplit.getSatellites());
+			String message = broadcastService.getMessageFromSatellites(constellationInSplit.getSatellites());
+			SatelliteResponseVo satelliteResponseVo = new SatelliteResponseVo(handCalculatedPosition, message);
+			
+			return ResponseEntity.status(HttpStatus.OK).body(satelliteResponseVo);
+		
+		} catch (AppException ex) {
+			logger.debug("App exception", ex);
+			return ex.getRespose();
+		} catch (Exception e) {
+			logger.debug("unexpected exception", e);
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+		} finally {
+			// Reset the storage of constellations
+			constellationInSplit = new SatelliteConstellationVo();
+		}
+	}
+	
+	private void fillInData() {
+		
+		// If we have three satellites we keep going
+		if (constellationInSplit.getSatellites().size() == 3) return;
+		
+		int maxLength = 0;
+		// Check if we have unless one satellite, and check the maximum possible length of the message
+		for (SatelliteVo satelliteVo : constellationInSplit.getSatellites()) {
+			if (satelliteVo.getMessage().size() > maxLength) maxLength = satelliteVo.getMessage().size();
+		}
+		
+		if (constellationInSplit.getSatellites().size() < 3) {
+			for (int i = constellationInSplit.getSatellites().size(); i < 3; i++) {
+				constellationInSplit.getSatellites().add(new SatelliteVo(maxLength));
+			}
+		}
+	}
+
 	@GetMapping(value = "/gettest", produces = "application/json")
 	public void gettest() {
 		try {

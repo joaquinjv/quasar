@@ -1,6 +1,8 @@
 package com.ml.quasar.model.vo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class SatelliteVo implements Serializable {
@@ -12,10 +14,16 @@ public class SatelliteVo implements Serializable {
 	
 	private String name;
 	private double distance;
-	private List<String> message;
+	private List<String> message = new ArrayList<String>();
 	
 	public SatelliteVo() {
 		super();
+	}
+	
+	public SatelliteVo(int msgSize) {
+		String[] emptyMsg = new String[msgSize];
+		Arrays.fill(emptyMsg, "");
+		this.message.addAll(Arrays.asList(emptyMsg));
 	}
 
 	public SatelliteVo(String name, double distance) {
