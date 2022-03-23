@@ -102,7 +102,7 @@ public class TopSecretController {
 		}
 	}
 	
-	@RequestMapping(value = "/topsecret_split", produces = "application/json", method = RequestMethod.GET)
+	@RequestMapping(value = "/topsecret_split", consumes = "application/json", produces = "application/json", method = RequestMethod.GET)
 	public ResponseEntity<?> topsecretSplitGet() {
 		try {
 			this.getLogger().info("about to check top secret split");
