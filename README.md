@@ -83,6 +83,7 @@ The information to send must be in a JSON format, for example:
 }
 ```
 The response will be something as the next format.
+
 ```
 {
     "position": {
@@ -92,6 +93,7 @@ The response will be something as the next format.
     "message": "este es un mensaje secreto"
 }
 ```
+
 Status 200 OK.
 
 In case we couldn't encode the message or we couln't get the coordinates, the response will be Status 404 NOT FOUND.
@@ -107,6 +109,44 @@ A possible graph of how the cloud is structured can be the following.
 ## ![alt text](https://user-images.githubusercontent.com/10168644/155060111-4fcfa041-60d3-4049-af9f-0b6e2b940db6.png)
 
 The project was built with gradle and deployed in the gcloud environment through a jar.
+
+### Other services
+
+* POST to "core/topsecret_split" and GET to "core/topsecret_split"
+
+Example: POST to https://quasarml-340722.lm.r.appspot.com/core/topsecret_split
+
+This service must send the information of a satellite individually. It will be possible to send from 1 to 3 satellites in a row and then try to obtain the information via GET.
+
+```
+{
+     "name": "sky",
+     "distance": 25.0,
+     "message": ["this","is","","message",""]
+}
+```
+
+Example: GET to https://quasarml-340722.lm.r.appspot.com/core/topsecret_split
+
+Once I have received (or not) the above POSTs, this service will determine if I can read the secret message. Here the possibilities are:
+
+If it is OK:
+
+```
+{
+     "position": {
+         "x": 18.0,
+         "and": 11.0
+     },
+     "message": "this is a secret message"
+}
+```
+
+With STATUS 200 OK
+
+If it turns out WRONG:
+
+In case of not being able to encode the message, for example, the response will be Status 404 NOT FOUND.
 
 
 
@@ -179,6 +219,7 @@ Se debe clonar el proyecto del siguiente link. Una vez levantado en nuestro ambi
 * http://localhost:8080/core/topsecret
 
 La información a enviar debe ser un JSON, como por ejemplo:
+
 ```
 {
     "satellites": [{
@@ -196,7 +237,9 @@ La información a enviar debe ser un JSON, como por ejemplo:
     }]
 }
 ```
+
 La respuesta devuelta será del siguiente formato.
+
 ```
 {
     "position": {
@@ -206,6 +249,7 @@ La respuesta devuelta será del siguiente formato.
     "message": "este es un mensaje secreto"
 }
 ```
+
 con Status 200 OK.
 
 En caso de no poder por ejemplo codificar el mensaje u obtener las coordenadas la respuesta será Status 404 NOT FOUND.
@@ -222,7 +266,41 @@ Una posible gráfica de cómo se estructura la nube puede ser la siguiente.
 
 El proyecto fue armado con gradle y desplegado en el ambiente gcloud mediante un jar.
 
+### Otros servicios
 
+* POST a "core/topsecret_split" y GET a "core/topsecret_split"
 
+Ejemplo: POST a https://quasarml-340722.lm.r.appspot.com/core/topsecret_split
 
+Este servicio se debe enviar la información de un satélite de manera individual. Se podrá enviar de 1 a 3 satélites seguidos y luego tratar de obtener la información vía GET.
+
+```
+{
+    "name": "sky",
+    "distance": 25.0,
+    "message": ["este","es","","mensaje",""]
+}
+```
+
+Ejemplo: GET a https://quasarml-340722.lm.r.appspot.com/core/topsecret_split
+
+Una vez que recibí (o no) los POST anteriores, este servicio determinará si puedo leer el mensaje secreto. Acá las posibilidades son:
+
+Si resulta OK:
+
+```
+{
+    "position": {
+        "x": 18.0,
+        "y": 11.0
+    },
+    "message": "este es un mensaje secreto"
+}
+```
+
+Con STATUS 200 OK
+
+Si resulta MAL:
+
+En caso de no poder por ejemplo codificar el mensaje la respuesta será Status 404 NOT FOUND.
 
