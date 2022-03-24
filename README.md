@@ -122,7 +122,7 @@ This service must send the information of a satellite individually. It will be p
 {
      "name": "sky",
      "distance": 25.0,
-     "message": ["this","is","","message",""]
+     "message": ["this","is","","secret",""]
 }
 ```
 
@@ -136,7 +136,7 @@ If it is OK:
 {
      "position": {
          "x": 18.0,
-         "and": 11.0
+         "y": 11.0
      },
      "message": "this is a secret message"
 }
