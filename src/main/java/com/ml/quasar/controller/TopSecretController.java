@@ -102,8 +102,7 @@ public class TopSecretController {
 		}
 	}
 	
-	//@RequestMapping(value = "/topsecret_split", consumes = "application/json", produces = "application/json", method = RequestMethod.GET)
-	@GetMapping(value = "/topsecret_split", produces = "application/json")
+	@RequestMapping(value = "/topsecret_split", consumes = "application/json", produces = "application/json", method = RequestMethod.GET)
 	public ResponseEntity<?> topsecretSplitGet() {
 		try {
 			this.getLogger().info("about to check top secret split");
@@ -153,40 +152,11 @@ public class TopSecretController {
 	@GetMapping(value = "/gettest", produces = "application/json")
 	public void gettest() {
 		try {
-			this.getLogger().info("get test ok II!");
+			this.getLogger().info("get test ok!");
 			
 		} catch (Exception e) {
 			logger.debug("unexpected exception", e);
 			e.printStackTrace();
-		}
-	}
-	
-	@GetMapping(value = "/gettest2", produces = "application/json")
-	public ResponseEntity<?> gettest2() {
-		try {
-			this.getLogger().info("about to check top secret split");
-			
-			// Check if we have the enough of satellite's message to try to decode the message (three), if not, fill in with generic data
-			this.fillInData();
-			
-			// check if we are able to decode the message
-			List<PositionVo> positions = setPositionFromProperties();
-	        double[] handCalculatedPosition = locationService.getHandLocation(positions, constellationInSplit.getSatellites());
-			String message = broadcastService.getMessageFromSatellites(constellationInSplit.getSatellites());
-			SatelliteResponseVo satelliteResponseVo = new SatelliteResponseVo(handCalculatedPosition, message);
-			
-			return ResponseEntity.status(HttpStatus.OK).body(satelliteResponseVo);
-		
-		} catch (AppException ex) {
-			logger.debug("App exception", ex);
-			return ex.getRespose();
-		} catch (Exception e) {
-			logger.debug("unexpected exception", e);
-			e.printStackTrace();
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-		} finally {
-			// Reset the storage of constellations
-			constellationInSplit = new SatelliteConstellationVo();
 		}
 	}
 
