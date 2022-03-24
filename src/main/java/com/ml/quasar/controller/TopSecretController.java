@@ -153,7 +153,7 @@ public class TopSecretController {
 	@GetMapping(value = "/gettest", produces = "application/json")
 	public void gettest() {
 		try {
-			this.getLogger().info("get test ok!");
+			this.getLogger().info("get test ok II!");
 			
 		} catch (Exception e) {
 			logger.debug("unexpected exception", e);
