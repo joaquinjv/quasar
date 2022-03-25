@@ -148,7 +148,7 @@ If it turns out WRONG:
 
 In case of not being able to encode the message, for example, the response will be Status 404 NOT FOUND.
 
-
+In either case, the GET also "cleans up" previous POSTs, so POSTs must be sent again to determine whether or not the message can be read. A separate service could have been made to perform this task, but for simplicity it was done like this.
 
 ---
 
@@ -303,4 +303,6 @@ Con STATUS 200 OK
 Si resulta MAL:
 
 En caso de no poder por ejemplo codificar el mensaje la respuesta será Status 404 NOT FOUND.
+
+En cualquiera de ambos casos, el GET también "limpia" los anteriores POST, de manera que hay que enviar nuevamente los POST para determinar si se puede o no leer el mensaje. Se podría haber hecho un servicio aparte para realizar esta tarea, pero por simplificación se hizo así.
 
